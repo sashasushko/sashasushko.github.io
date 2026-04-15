@@ -1,17 +1,17 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Александр Сушко</title>
-    
+
     <meta property="og:title" content="Александр Сушко - Senior Front-end Developer" />
     <meta property="og:description" content="Фронтенд-разработчик. Мой основной стек: React, Next, TypeScript." />
     <meta property="og:image" content="https://sushko.me/og-image.png" />
     <meta property="og:url" content="https://sushko.me/" />
     <meta property="og:type" content="website" />
-    
+
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Александр Сушко - Senior Front-end Developer" />
     <meta name="twitter:description" content="Фронтенд-разработчик. Мой основной стек: React, Next, TypeScript." />
@@ -21,51 +21,48 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css?family=Montserrat:400,900&amp;subset=cyrillic"
-      rel="stylesheet"
-    />
-    
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,900&amp;subset=cyrillic" rel="stylesheet" />
+
     <link href="/style.css" rel="stylesheet" />
-    
+
     <script>
-      (function() {
+      (function () {
         function applyTheme() {
-          const theme = localStorage.getItem('theme') || 'auto';
-          const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          if (theme === 'dark' || (theme === 'auto' && isDark)) {
-            document.documentElement.setAttribute('data-theme', 'dark');
+          const theme = localStorage.getItem("theme") || "auto";
+          const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          if (theme === "dark" || (theme === "auto" && isDark)) {
+            document.documentElement.setAttribute("data-theme", "dark");
           } else {
-            document.documentElement.removeAttribute('data-theme');
+            document.documentElement.removeAttribute("data-theme");
           }
         }
-        
+
         applyTheme();
-        
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTheme);
-        
+
+        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
+
         window.__applyTheme = applyTheme;
       })();
 
       document.addEventListener("DOMContentLoaded", () => {
-        const buttons = document.querySelectorAll('.theme-btn');
-        
+        const buttons = document.querySelectorAll(".theme-btn");
+
         function updateActiveBtn(theme) {
-          buttons.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-set-theme') === theme));
+          buttons.forEach((btn) => btn.classList.toggle("active", btn.getAttribute("data-set-theme") === theme));
         }
 
-        updateActiveBtn(localStorage.getItem('theme') || 'auto');
+        updateActiveBtn(localStorage.getItem("theme") || "auto");
 
-        buttons.forEach(btn => {
-          btn.addEventListener('click', () => {
-            const theme = btn.getAttribute('data-set-theme');
-            if (theme === 'auto') {
-              localStorage.removeItem('theme');
+        buttons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const theme = btn.getAttribute("data-set-theme");
+            if (theme === "auto") {
+              localStorage.removeItem("theme");
             } else {
-              localStorage.setItem('theme', theme);
+              localStorage.setItem("theme", theme);
             }
             window.__applyTheme();
             updateActiveBtn(theme);
@@ -88,76 +85,52 @@
           <img src="/me.png" alt="Моё фото" width="520" height="auto" class="photo-img" />
         </div>
       </header>
-      
+
       <section class="wrapper">
         <div class="container">
           <div class="heading">
             <span class="heading-subtitle">Привет. Меня зовут</span>
             <h1 class="title-main">Александр Сушко</h1>
           </div>
-          
+
           <p class="text">
-            Я&nbsp;фронтенд-разработчик в&nbsp;<i class="place-of-work"
-              >&lt;место вакантно&gt;</i
-            >. В&nbsp; прошлом автор курсов по&nbsp;JavaScript и&nbsp;React
-            в&nbsp;<a class="dark-link" href="https://htmlacademy.ru/"
+            Я&nbsp;фронтенд-разработчик в&nbsp;<i class="place-of-work">&lt;место вакантно&gt;</i>. В&nbsp;прошлом автор
+            курсов по&nbsp;JavaScript и&nbsp;React в&nbsp;<a class="dark-link" href="https://htmlacademy.ru/"
               >HTML&nbsp;Academy</a
-            >, разработчик в&nbsp;<a class="dark-link" href="https://pixelpoint.io/"
-              >Pixel Point</a
-            >, <a class="dark-link" href="https://cube.dev/">Cube</a>,
-            <a class="dark-link" href="https://kontur.ru/career">Контурe</a>,
-            <a class="dark-link" href="https://csssr.com/ru">CSSSR</a>
-            и&nbsp;нескольких дизайн-студиях Москвы. Параллельно я&nbsp;помогаю
-            с&nbsp;переводом
-            <a class="dark-link" href="https://developer.mozilla.org/ru"
-              >MDN&nbsp;Web&nbsp;Docs</a
-            >
-            на&nbsp;русский язык.
+            >, разработчик в&nbsp;<a class="dark-link" href="https://exness-careers.com/">Exness</a>,
+            <a class="dark-link" href="https://pixelpoint.io/">Pixel Point</a>,
+            <a class="dark-link" href="https://cube.dev/">Cube</a>,
+            <a class="dark-link" href="https://csssr.com/ru">CSSSR</a>,
+            <a class="dark-link" href="https://kontur.ru/career">Контуре</a>
+            и&nbsp;нескольких дизайн-студиях Москвы.
           </p>
           <p class="text">
-            Мой основной cтек&nbsp;React, Next, TypeScript.<br />Есть опыт
-            работы с Vue и Nuxt.
+            Сейчас работаю с&nbsp;React, Next и&nbsp;TypeScript. Но считаю стек набором инструментов и&nbsp;готов быстро
+            адаптироваться к&nbsp;другим современным фреймворкам вроде Vue.js или&nbsp;Svelte.
           </p>
           <p class="text">
-            Кроме работы я&nbsp;выступаю с&nbsp;докладами на&nbsp;<a
+            Вхожу в&nbsp;программный комитет
+            <a class="dark-link" href="https://podlodka.io/reactcrew">Podlodka React Crew</a>, а иногда сам выступаю
+            с&nbsp;докладами на&nbsp;<a class="dark-link" href="https://youtu.be/qmaXZN683TY">митапах</a> и&nbsp;<a
               class="dark-link"
-              href="https://youtu.be/qmaXZN683TY"
-              >митапах</a
-            >
-            и&nbsp;<a class="dark-link" href="https://youtu.be/323raX_fW6A"
+              href="https://youtu.be/323raX_fW6A"
               >конференциях</a
-            >. Поддерживаю сообщество фронтендеров.
-            <a class="link" href="https://getmentor.dev/sasha-sushko-181"
-              >Наставляю и менторю</a
-            >
-            новичков.
+            >. Увлекаюсь гражданской авиацией, <a class="link" href="/travel">путешествую</a>.
           </p>
-
           <p class="text">
-            В&nbsp;свободное время увлекаюсь гражданской авиацией,
-            <a class="link" href="/travel">путешествую</a>. Раньше переводил фильмы
-            и&nbsp;сериалы с&nbsp;английского.
+            Какое-то время был ментором в&nbsp;программе Google Summer of Code, отвечал за&nbsp;русскую версию
+            справочника веб-разработчика
+            <a class="dark-link" href="https://developer.mozilla.org/ru">MDN&nbsp;Web&nbsp;Docs</a>, проводил лекции
+            по&nbsp;фронтенд-разработке для&nbsp;студентов колледжей, наставлял и&nbsp;менторил новичков.
           </p>
-
-          <ul class="contacts">
-            <li class="contacts-item">
-              <a class="link" href="mailto:sasha@sushko.me">Почта</a>
-            </li>
-            <li class="contacts-item">
-              <a class="link" href="https://github.com/sashasushko">GitHub</a>
-            </li>
-            <li class="contacts-item">
-              <a class="link" href="https://twitter.com/sashasushko">Twitter</a>
-            </li>
-          </ul>
 
           <h2 class="title-secondary">Для HR</h2>
           <p class="text">
-            Мой опыт, обязанности, условия работы и&nbsp;контакты в&nbsp;профиле
-            на&nbsp;<a class="link" href="https://career.habr.com/sashasushko-159383"
-              >&laquo;Хабр&nbsp;Карьере&raquo;</a
-            >
-            и <a class="link" href="https://linkedin.com/in/sashasushko">LinkedIn</a>.
+            Мой опыт, обязанности, подробное описание прошлых мест на&nbsp;<a
+              class="link"
+              href="https://linkedin.com/in/sashasushko"
+              >LinkedIn</a
+            >.<br />Почта для связи&nbsp;&mdash; <a class="link" href="mailto:sasha@sushko.me">sasha@sushko.me</a>
           </p>
         </div>
       </section>
