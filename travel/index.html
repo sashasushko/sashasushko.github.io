@@ -5,124 +5,100 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Путешествия Александра Сушко</title>
+    
+    <meta property="og:title" content="Путешествия Александра Сушко" />
+    <meta property="og:description" content="Интерактивная карта моих путешествий по миру." />
+    <meta property="og:image" content="https://sushko.me/og-image.png" />
+    <meta property="og:url" content="https://sushko.me/travel/" />
+    <meta property="og:type" content="website" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Путешествия Александра Сушко" />
+    <meta name="twitter:description" content="Интерактивная карта моих путешествий по миру." />
+    <meta name="twitter:image" content="https://sushko.me/og-image.png" />
+
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <style>
-      html {
-        font-size: 16px;
-      }
-
-      body {
-        margin: 0;
-        color: #3c3c3c;
-        font: 1.2em/1.5 "Montserrat", Helvetica, Arial, sans-serif;
-      }
-
-      a:link,
-      a:visited,
-      a:hover {
-        border-bottom: 2px solid rgba(10, 132, 255, 0.3);
-        color: #0a84ff;
-        text-decoration: none;
-      }
-
-      a:hover {
-        border-bottom-color: rgba(10, 132, 255, 0.7);
-      }
-
-      a:active {
-        border-bottom-color: rgba(211, 0, 169, 0.5);
-        color: #dd00a9;
-      }
-
-      h1,
-      h2 {
-        font-weight: 900;
-      }
-
-      h1 {
-        margin-top: 0;
-        margin-bottom: 0;
-        font-size: 1.25em;
-        line-height: 1.2;
-      }
-
-      .header {
-        position: absolute;
-        z-index: 2;
-        top: 25px;
-        left: 15px;
-        padding: 7px 25px 9px 15px;
-        background-color: #fff;
-        border-radius: 10px;
-      }
-
-      .title {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .back {
-        font-size: 0.6em;
-        font-weight: 400;
-      }
-
-      .map {
-        position: relative;
-        z-index: 1;
-        width: 100vw;
-        height: 100vh;
-      }
-
-      @media (min-width: 992px) {
-        h1 {
-          font-size: 2em;
-        }
-
-        .header {
-          top: 20px;
-          left: 10px;
-          padding: 10px 45px 10px 20px;
-          border-radius: 15px;
-        }
-
-        .back {
-          font-size: 0.5em;
-        }
-      }
-    </style>
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-    />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css?family=Montserrat:400,900&amp;subset=cyrillic"
       rel="stylesheet"
     />
+    
+    <link href="/style.css" rel="stylesheet" />
+    
+    <script>
+      (function() {
+        function applyTheme() {
+          const theme = localStorage.getItem('theme') || 'auto';
+          const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (theme === 'dark' || (theme === 'auto' && isDark)) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+          } else {
+            document.documentElement.removeAttribute('data-theme');
+          }
+          document.dispatchEvent(new Event('themeChanged'));
+        }
+        
+        applyTheme();
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTheme);
+        window.__applyTheme = applyTheme;
+      })();
+    </script>
+    
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
   </head>
 
   <body>
-    <header class="header">
-      <h1 class="title">
-        <a href="/" class="back">Александр Сушко</a>
+    <div class="theme-toggle">
+      <button class="theme-btn" data-set-theme="light">Light</button>
+      <button class="theme-btn active" data-set-theme="auto">Auto</button>
+      <button class="theme-btn" data-set-theme="dark">Dark</button>
+    </div>
+
+    <header class="map-header">
+      <h1 class="map-title">
+        <a href="/" class="map-back-link">Александр Сушко</a>
         Путешествует
       </h1>
     </header>
 
-    <div class="map" id="map"></div>
+    <div class="map-container" id="map"></div>
 
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-
-    <script type="text/javascript">
+    <script>
       const map = L.map("map", { zoomControl: false }).setView([50, 52], 3);
 
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      const lightTiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution:
           'Карты &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>. Иконки &copy; <a href="https://www.flaticon.com/authors/smashicons">Smashicons</a>',
-      }).addTo(map);
+      });
+
+      const darkTiles = L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png", {
+        attribution:
+          'Карты &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>. Иконки &copy; <a href="https://www.flaticon.com/authors/smashicons">Smashicons</a>',
+      });
+
+      function updateMapTiles() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        if (isDark) {
+          if (map.hasLayer(lightTiles)) map.removeLayer(lightTiles);
+          if (!map.hasLayer(darkTiles)) darkTiles.addTo(map);
+        } else {
+          if (map.hasLayer(darkTiles)) map.removeLayer(darkTiles);
+          if (!map.hasLayer(lightTiles)) lightTiles.addTo(map);
+        }
+      }
+
+      updateMapTiles();
+      document.addEventListener('themeChanged', updateMapTiles);
 
       L.control
         .zoom({
@@ -130,21 +106,25 @@
         })
         .addTo(map);
 
-      const icon = L.icon({
-        iconUrl: "/pin.svg",
+      const pinSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 58"><path fill="none" stroke="var(--pin-line, #556080)" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M14 27v29"/><circle cx="14" cy="14" r="13" fill="var(--pin-fill, #dd352e)" stroke-width="1" stroke="var(--pin-stroke, #ffffff)" stroke-opacity="0.5"/><circle cx="9" cy="10" r="3" fill="var(--pin-highlight, #f76363)"/></svg>';
+
+      const icon = L.divIcon({
+        html: pinSvg,
+        className: "custom-pin",
         iconSize: [28, 58],
         iconAnchor: [14, 58],
         popupAnchor: [0, 0],
       });
 
-      const iconSoon = L.icon({
-        iconUrl: "/pin-soon.svg",
+      const iconSoon = L.divIcon({
+        html: pinSvg,
+        className: "custom-pin pin-soon",
         iconSize: [28, 58],
         iconAnchor: [14, 58],
         popupAnchor: [0, 0],
       });
 
-      fetch("/data.json")
+      fetch("data.json")
         .then((response) => response.json())
         .then(({ visited, soon }) => {
           visited.forEach(({ title, coords }) => {
@@ -159,6 +139,29 @@
         .catch((error) => {
           console.error(error);
         });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const buttons = document.querySelectorAll('.theme-btn');
+        
+        function updateActiveBtn(theme) {
+          buttons.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-set-theme') === theme));
+        }
+
+        updateActiveBtn(localStorage.getItem('theme') || 'auto');
+
+        buttons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const theme = btn.getAttribute('data-set-theme');
+            if (theme === 'auto') {
+              localStorage.removeItem('theme');
+            } else {
+              localStorage.setItem('theme', theme);
+            }
+            if (window.__applyTheme) window.__applyTheme();
+            updateActiveBtn(theme);
+          });
+        });
+      });
     </script>
   </body>
 </html>
