@@ -1,0 +1,192 @@
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  color: #3c3c3c;
+  font: 1.2em/1.6 "Montserrat", Helvetica, Arial, sans-serif;
+}
+
+a:link,
+a:visited,
+a:hover {
+  border-bottom: 2px solid rgba(10, 132, 255, 0.3);
+  color: #0a84ff;
+  text-decoration: none;
+}
+
+a:hover {
+  border-bottom-color: rgba(10, 132, 255, 0.7);
+}
+
+.dark:link,
+.dark:visited,
+.dark:hover {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.3);
+  color: #000;
+}
+
+.dark:hover {
+  border-bottom-color: rgba(0, 0, 0, 0.6);
+}
+
+a:active,
+.dark:active {
+  border-bottom-color: rgba(211, 0, 169, 0.5);
+  color: #dd00a9;
+}
+
+.wrapper {
+  margin: 0 1em 6em;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 26em;
+}
+
+h1,
+h2 {
+  font-weight: 900;
+}
+
+h1 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 2em;
+  line-height: 1.2;
+}
+
+h2 {
+  margin-top: 1.6em;
+  margin-bottom: 0.45em;
+  font-size: 1.4em;
+  line-height: 1.35;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1.5em;
+}
+
+.photo {
+  margin-bottom: 2em;
+  padding: 2em 1em 0;
+  background-color: #d1d1d1;
+}
+
+.photo img {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  filter: grayscale(1) brightness(1.1);
+}
+
+.heading {
+  margin-bottom: 2em;
+}
+
+.heading span {
+  display: block;
+  margin-bottom: 0.3em;
+}
+
+.contacts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.contacts li {
+  position: relative;
+  margin-bottom: 1em;
+  padding-right: 2.25em;
+}
+
+.contacts li:last-child {
+  padding-right: 0;
+}
+
+.contacts li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 1em;
+  margin-top: -0.12em;
+  width: 0.25em;
+  height: 0.25em;
+  border-radius: 50%;
+  background-color: currentColor;
+}
+
+.place-of-work {
+  background-color: #f6f6f5;
+  padding: 0.05em 0.1em 0.075em;
+  border-radius: 0.2em;
+  font-family: monospace;
+}
+
+@media (min-width: 992px) {
+  body {
+    font-size: 1.2em;
+    line-height: 1.7;
+  }
+  
+  h1 {
+    font-size: 2.1em;
+  }
+
+  .photo {
+    padding: 0 2em 0;
+  }
+  
+  .wrapper {
+    margin: 0 2em 7em;
+  }
+
+  .container {
+    max-width: 38em;
+  }
+
+  .heading span {
+    font-size: 1.2em;
+  }
+}
+
+@media (min-width: 1200px) {
+  body {
+    font-size: 1.3em;
+    line-height: 1.8;
+  }
+  
+  h1 {
+    font-size: 2.2em;
+  }
+
+  .photo {
+    padding: 1em 4em 0 8em;
+  }
+  
+  .wrapper {
+    margin: 0 4em 6em 8em;
+  }
+
+  .container {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 40em;
+  }
+
+  .heading span {
+    margin-bottom: -0.1em;
+  }
+}
