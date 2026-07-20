@@ -1,55 +1,65 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Путешествия Александра Сушко</title>
-    
+
     <meta property="og:title" content="Путешествия Александра Сушко" />
-    <meta property="og:description" content="Интерактивная карта моих путешествий по миру." />
+    <meta
+      property="og:description"
+      content="Интерактивная карта моих путешествий по миру."
+    />
     <meta property="og:image" content="https://sushko.me/og-image.png" />
     <meta property="og:url" content="https://sushko.me/travel/" />
     <meta property="og:type" content="website" />
-    
+
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Путешествия Александра Сушко" />
-    <meta name="twitter:description" content="Интерактивная карта моих путешествий по миру." />
+    <meta
+      name="twitter:description"
+      content="Интерактивная карта моих путешествий по миру."
+    />
     <meta name="twitter:image" content="https://sushko.me/og-image.png" />
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css?family=Montserrat:400,900&amp;subset=cyrillic"
       rel="stylesheet"
     />
-    
+
     <link href="/style.css" rel="stylesheet" />
-    
+
     <script>
-      (function() {
+      (function () {
         function applyTheme() {
-          const theme = localStorage.getItem('theme') || 'auto';
-          const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          if (theme === 'dark' || (theme === 'auto' && isDark)) {
-            document.documentElement.setAttribute('data-theme', 'dark');
+          const theme = localStorage.getItem("theme") || "auto";
+          const isDark = window.matchMedia(
+            "(prefers-color-scheme: dark)",
+          ).matches;
+          if (theme === "dark" || (theme === "auto" && isDark)) {
+            document.documentElement.setAttribute("data-theme", "dark");
           } else {
-            document.documentElement.removeAttribute('data-theme');
+            document.documentElement.removeAttribute("data-theme");
           }
-          document.dispatchEvent(new Event('themeChanged'));
+          document.dispatchEvent(new Event("themeChanged"));
         }
-        
+
         applyTheme();
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTheme);
+        window
+          .matchMedia("(prefers-color-scheme: dark)")
+          .addEventListener("change", applyTheme);
         window.__applyTheme = applyTheme;
       })();
     </script>
-    
+
     <link
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -76,18 +86,25 @@
     <script>
       const map = L.map("map", { zoomControl: false }).setView([50, 52], 3);
 
-      const lightTiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution:
-          'Карты &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>. Иконки &copy; <a href="https://www.flaticon.com/authors/smashicons">Smashicons</a>',
-      });
+      const lightTiles = L.tileLayer(
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+        {
+          attribution:
+            'Карты &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>. Иконки &copy; <a href="https://www.flaticon.com/authors/smashicons">Smashicons</a>',
+        },
+      );
 
-      const darkTiles = L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png", {
-        attribution:
-          'Карты &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>. Иконки &copy; <a href="https://www.flaticon.com/authors/smashicons">Smashicons</a>',
-      });
+      const darkTiles = L.tileLayer(
+        "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
+        {
+          attribution:
+            'Карты &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>. Иконки &copy; <a href="https://www.flaticon.com/authors/smashicons">Smashicons</a>',
+        },
+      );
 
       function updateMapTiles() {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const isDark =
+          document.documentElement.getAttribute("data-theme") === "dark";
         if (isDark) {
           if (map.hasLayer(lightTiles)) map.removeLayer(lightTiles);
           if (!map.hasLayer(darkTiles)) darkTiles.addTo(map);
@@ -98,7 +115,7 @@
       }
 
       updateMapTiles();
-      document.addEventListener('themeChanged', updateMapTiles);
+      document.addEventListener("themeChanged", updateMapTiles);
 
       L.control
         .zoom({
@@ -106,7 +123,8 @@
         })
         .addTo(map);
 
-      const pinSvg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 58"><path fill="none" stroke="var(--pin-line, #556080)" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M14 27v29"/><circle cx="14" cy="14" r="13" fill="var(--pin-fill, #dd352e)" stroke-width="1" stroke="var(--pin-stroke, #ffffff)" stroke-opacity="0.5"/><circle cx="9" cy="10" r="3" fill="var(--pin-highlight, #f76363)"/></svg>';
+      const pinSvg =
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 58"><path fill="none" stroke="var(--pin-line, #556080)" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M14 27v29"/><circle cx="14" cy="14" r="13" fill="var(--pin-fill, #dd352e)" stroke-width="1" stroke="var(--pin-stroke, #ffffff)" stroke-opacity="0.5"/><circle cx="9" cy="10" r="3" fill="var(--pin-highlight, #f76363)"/></svg>';
 
       const icon = L.divIcon({
         html: pinSvg,
@@ -141,21 +159,26 @@
         });
 
       document.addEventListener("DOMContentLoaded", () => {
-        const buttons = document.querySelectorAll('.theme-btn');
-        
+        const buttons = document.querySelectorAll(".theme-btn");
+
         function updateActiveBtn(theme) {
-          buttons.forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-set-theme') === theme));
+          buttons.forEach((btn) =>
+            btn.classList.toggle(
+              "active",
+              btn.getAttribute("data-set-theme") === theme,
+            ),
+          );
         }
 
-        updateActiveBtn(localStorage.getItem('theme') || 'auto');
+        updateActiveBtn(localStorage.getItem("theme") || "auto");
 
-        buttons.forEach(btn => {
-          btn.addEventListener('click', () => {
-            const theme = btn.getAttribute('data-set-theme');
-            if (theme === 'auto') {
-              localStorage.removeItem('theme');
+        buttons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const theme = btn.getAttribute("data-set-theme");
+            if (theme === "auto") {
+              localStorage.removeItem("theme");
             } else {
-              localStorage.setItem('theme', theme);
+              localStorage.setItem("theme", theme);
             }
             if (window.__applyTheme) window.__applyTheme();
             updateActiveBtn(theme);
