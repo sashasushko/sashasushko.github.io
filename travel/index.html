@@ -7,21 +7,17 @@
     <title>Путешествия Александра Сушко</title>
 
     <meta property="og:title" content="Путешествия Александра Сушко" />
-    <meta
-      property="og:description"
-      content="Интерактивная карта моих путешествий по миру."
-    />
+    <meta property="og:description" content="Интерактивная карта моих путешествий по миру." />
     <meta property="og:image" content="https://sushko.me/og-image.png" />
     <meta property="og:url" content="https://sushko.me/travel/" />
     <meta property="og:type" content="website" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Путешествия Александра Сушко" />
-    <meta
-      name="twitter:description"
-      content="Интерактивная карта моих путешествий по миру."
-    />
+    <meta name="twitter:description" content="Интерактивная карта моих путешествий по миру." />
     <meta name="twitter:image" content="https://sushko.me/og-image.png" />
+
+    <link rel="canonical" href="https://sushko.me/travel/" />
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -30,10 +26,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css?family=Montserrat:400,900&amp;subset=cyrillic"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,900&amp;subset=cyrillic" rel="stylesheet" />
 
     <link href="/style.css" rel="stylesheet" />
 
@@ -41,9 +34,7 @@
       (function () {
         function applyTheme() {
           const theme = localStorage.getItem("theme") || "auto";
-          const isDark = window.matchMedia(
-            "(prefers-color-scheme: dark)",
-          ).matches;
+          const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
           if (theme === "dark" || (theme === "auto" && isDark)) {
             document.documentElement.setAttribute("data-theme", "dark");
           } else {
@@ -53,17 +44,12 @@
         }
 
         applyTheme();
-        window
-          .matchMedia("(prefers-color-scheme: dark)")
-          .addEventListener("change", applyTheme);
+        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
         window.__applyTheme = applyTheme;
       })();
     </script>
 
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-    />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
   </head>
 
   <body>
@@ -86,25 +72,18 @@
     <script>
       const map = L.map("map", { zoomControl: false }).setView([50, 52], 3);
 
-      const lightTiles = L.tileLayer(
-        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-        {
-          attribution:
-            'Карты &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>. Иконки &copy; <a href="https://www.flaticon.com/authors/smashicons">Smashicons</a>',
-        },
-      );
+      const lightTiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+          'Карты &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>. Иконки &copy; <a href="https://www.flaticon.com/authors/smashicons">Smashicons</a>',
+      });
 
-      const darkTiles = L.tileLayer(
-        "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png",
-        {
-          attribution:
-            'Карты &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>. Иконки &copy; <a href="https://www.flaticon.com/authors/smashicons">Smashicons</a>',
-        },
-      );
+      const darkTiles = L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png", {
+        attribution:
+          'Карты &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>. Иконки &copy; <a href="https://www.flaticon.com/authors/smashicons">Smashicons</a>',
+      });
 
       function updateMapTiles() {
-        const isDark =
-          document.documentElement.getAttribute("data-theme") === "dark";
+        const isDark = document.documentElement.getAttribute("data-theme") === "dark";
         if (isDark) {
           if (map.hasLayer(lightTiles)) map.removeLayer(lightTiles);
           if (!map.hasLayer(darkTiles)) darkTiles.addTo(map);
@@ -149,9 +128,7 @@
             L.marker(coords, { title, icon: icon }).bindPopup(title).addTo(map);
           });
           soon.forEach(({ title, coords }) => {
-            L.marker(coords, { title, icon: iconSoon })
-              .bindPopup(`${title}<i>, в ближайших планах</i>`)
-              .addTo(map);
+            L.marker(coords, { title, icon: iconSoon }).bindPopup(`${title}<i>, в ближайших планах</i>`).addTo(map);
           });
         })
         .catch((error) => {
@@ -162,12 +139,7 @@
         const buttons = document.querySelectorAll(".theme-btn");
 
         function updateActiveBtn(theme) {
-          buttons.forEach((btn) =>
-            btn.classList.toggle(
-              "active",
-              btn.getAttribute("data-set-theme") === theme,
-            ),
-          );
+          buttons.forEach((btn) => btn.classList.toggle("active", btn.getAttribute("data-set-theme") === theme));
         }
 
         updateActiveBtn(localStorage.getItem("theme") || "auto");
